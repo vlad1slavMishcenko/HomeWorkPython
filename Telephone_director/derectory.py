@@ -53,6 +53,7 @@ def search():
     for i, contact in phone_book.items():
         if word.lower() in ' '.join(list(contact.values())).lower():
             result[i] = contact
+
     return result
 
 def remove():
@@ -105,7 +106,7 @@ def menu()-> int:
     5. Найти контакт
     6. Изменить контакт
     7. Удалить контакт
-    8 Выход'''
+    8 Выход '''
     print(main_menu)
     while True:
         select = input('Выберете пункт меню: ')
