@@ -36,8 +36,12 @@ def add_contact():
     if name == '' or phone == '':
         print('Поле имени или телефона осталось пустым, контакт не добавлен')
     else:
-        comment = input('Введите комментарий к контакту: ')
+        for contact in phone_book.values():
+            if contact['phone'] == phone:
+                print('Такой номер телефона уже существует, проверте правильность ввода')
+                return
 
+        comment = input('Введите комментарий к контакту: ')
         phone_book[uid + 1] = {'name': name, 'phone': phone, 'comment': comment}
         print(f'\nКонтакт {name} успешно добавлен в книгу!')
         print('=' * 200 + '\n')
@@ -53,7 +57,10 @@ def search():
 
 def remove():
     result = search()
-    if result != {}:
+    if len(result) == 0:
+        print('По вашему запросу ничего не найдено')
+        return
+    else:
         show_contact(result)
         index = int(input('Введите ID контакта, который хотим удалить: '))
         if index in phone_book.keys():
@@ -66,15 +73,28 @@ def remove():
             
 def update_contact():
     res = search()
-    show_contact(res)
-    index = int(input('Введите ID контакта, который хотим изменить: '))
-    name = input(' Введите новое имя контакта: ')
-    phone = input('Введите телефон контакта: ')
-    if name == '' or phone == '':
-        print('Поле имени или телефона осталось пустым, контакт не изменен')
+    if len(res) == 0:
+        print('По вашему запросу ничего не найдено')
+        return
     else:
-        comment = input('Введите комментарий к контакту: ')
-        phone_book[index] = {'name': name, 'phone': phone, 'comment': comment}
+        show_contact(res)
+        index = int(input('Введите ID контакта, который хотим изменить: '))
+        if index in phone_book.keys():
+            name = input(' Введите новое имя контакта: ')
+            phone = input('Введите телефон контакта: ')
+            if name == '' or phone == '':
+                print('Поле имени или телефона осталось пустым, контакт не изменен')
+            else:
+                for contact in phone_book.values():
+                    if contact['phone'] == phone:
+                        print('Такой номер телефона уже существует, проверте правильность ввода')
+                        return
+                comment = input('Введите комментарий к контакту: ')
+                phone_book[index] = {'name': name, 'phone': phone, 'comment': comment}
+                print(f'\nКонтакт {name} успешно изменен!')
+                print('=' * 200 + '\n')
+        else:
+            print('Введен неверный ID')
 
 def menu()-> int:
     main_menu = '''Главное меню: 
@@ -106,16 +126,13 @@ while True:
             show_contact(phone_book)
         case 4:
             add_contact()
-            save_file()
         case 5:
             result = search()
             show_contact(result)
         case 6:
             update_contact()
-            save_file()
         case 7:
             remove()
-            save_file()
         case 8:
             print("До свиданья! До новых встреч")
             break
