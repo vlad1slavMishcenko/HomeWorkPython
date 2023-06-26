@@ -28,6 +28,7 @@ def start():
                 word = view.search_word()
                 result = model.search(word)
                 view.show_contact(result, text.empty_search(word))
+
             case 6:
                 word = view.search_word()
                 result = model.search(word)
@@ -49,6 +50,7 @@ def start():
                         view.print_message(text.remuve_contact(res.get('name')))
                     else:
                         view.print_message(text.error_id)
+
             case 8:
                 print(view.print_message(text.good_bye))
                 break

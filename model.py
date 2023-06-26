@@ -12,6 +12,7 @@ def open_file():
     except:
         return False
 
+
 def save_file():
     try:
         with open(path, 'w', encoding='UTF-8') as file:

@@ -59,10 +59,12 @@ def update_contact(contact):
             else:
                 print(print_message(text.empty_contact))
                 break
+        print(print_message(text.update_contact))
     else:
         print(print_message(text.error_id))
 def search_word() -> str:
     return input(text.search_word)
+
 
 def del_contact():
     return input(text.id_contact)
