@@ -40,3 +40,6 @@ def empty_search(word: str) -> str:
 
 def add_successful(name: str) -> str:
     return f'Контакт {name} успешно добавлен в книгу '
+
+
+change_confirm = 'У вас есть не сохраненные изменения. Сохранить перед выходом? (y/n) '

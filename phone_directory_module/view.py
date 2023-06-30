@@ -66,3 +66,6 @@ def search_word() -> str:
 
 def del_contact():
     return input(text.id_contact)
+
+def view_input(massage: str) ->str:
+    return input(massage)
